@@ -1,9 +1,10 @@
+#include "graphics.hpp"
 #include <iostream>
 
-using namespace std;
+using namespace genv;
 
 int main()
 {
-cout << "hello world" << endl;
-return 0;
+    std::cout << "hello world" << std::endl;
+    return 0;
 }
