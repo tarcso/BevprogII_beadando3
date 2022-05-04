@@ -3,8 +3,6 @@
 
 #include "widgets.hpp"
 
-class Palya;
-
 class Korong : public Widget
 {
     private:

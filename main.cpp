@@ -3,6 +3,7 @@
 #include "szambeall.hpp"
 #include "pushbutton.hpp"
 #include "Window.hpp"
+#include "Jatekmester.hpp"
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -15,45 +16,16 @@ const int YY = 1200;
 
 class Ablak : public Window
 {
-
-    GordMenu* g1;
-    GordMenu* g2;
-    PushButton* jobbtn;
-    PushButton* balbtn;
+    Palya* palya;
 
 public:
     Ablak()
     {
-        g1 = new GordMenu(this, 10, 50, 150, 30, "válassz!", {
-                "elso elem", "masodik elem", "harmadik elem","negyedik elem", "otodik elem", "hatodik elem", "hetedik elem", "nyolcadik elem"
-        }, 5);
-
-        g2 = new GordMenu(this, 240, 50, 150, 30, "válassz!", {"helo", "sza", "hehe", "egysoros", "nice"}, 3);
-
-        jobbtn = new PushButton(this, 180, 50, 20, 30, "->", [this](){
-                std::string s = g1->allapot();
-                g2->hozzaadElem(s);
-                g1->torolElem(s);
-        });
-
-        balbtn = new PushButton(this, 200, 50, 20, 30, "<-", [this](){
-                std::string s = g2->allapot();
-                g1->hozzaadElem(s);
-                g2->torolElem(s);
-        });
-    }
-
-    void ertek_kiir()
-    {
-        std::ofstream logfile("main.log");
-        logfile << g1->allapot();
-        logfile << g2->allapot();
-        logfile.close();
+        palya = new Palya(this, XX/16.0, XX/8.0*35.0/32.0, XX/8.0*7.0, XX/8.0*6.0);
     }
 
     void esemeny(const std::string& ki_mondta)
     {
-        if(ki_mondta == "hello") ertek_kiir();
     }
 
 
