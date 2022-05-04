@@ -1,4 +1,8 @@
+#ifndef JATEKMESTER_HPP_INCLUDED
+#define JATEKMESTER_HPP_INCLUDED
+
 #include "widgets.hpp"
+#include "Palya.hpp"
 #include <vector>
 
 using namespace genv;
@@ -12,15 +16,6 @@ class JatekMester
         JatekMester(Window* window)
         {
             m_palya = new Palya(window, 0, 128, 1024, 876);
-            //for (size_t y = 0; y < 6; y++)
-            //{
-            //    std::vector<Korong*> sorvec;
-            //    for (size_t x = 0; x < 7; x++)
-            //    {
-            //        sorvec.push_back(nullptr);
-            //    }
-            //    
-            //} pálya konstruktorba bele
             
         }
         void handle(const genv::event& ev)
@@ -29,3 +24,5 @@ class JatekMester
         }
         void draw() const;
 };
+
+#endif //JATEKMESTR_HPP_INCLUDED
