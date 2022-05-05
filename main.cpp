@@ -2,8 +2,8 @@
 #include "menuelem.hpp"
 #include "szambeall.hpp"
 #include "pushbutton.hpp"
+#include "Palya.hpp"
 #include "Window.hpp"
-#include "Jatekmester.hpp"
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -14,14 +14,16 @@ using namespace genv;
 const int XX = 800;
 const int YY = 1000;
 
-class Ablak : public Window
+class JatekMester : public Window
 {
     Palya* palya;
+    Korong* k;
 
 public:
-    Ablak()
+    JatekMester()
     {
         palya = new Palya(this, XX/16.0, XX/8.0*35.0/32.0, XX/8.0*7.0, XX/8.0*6.0);
+        k = new Korong(this, XX/16, XX/8.0*35.0/32.0, XX/16.0 * 55.0/60.0, XX/16.0 * 55.0/60.0, false, true);
     }
 
     void esemeny(const std::string& ki_mondta)
@@ -35,7 +37,7 @@ int main()
 {
     gout.open(XX, YY);
     gout.load_font("LiberationSans-Regular.ttf");
-    Ablak* m = new Ablak;
-    m->event_loop();
+    JatekMester* j = new JatekMester;
+    j->event_loop();
     return 0;
 }
