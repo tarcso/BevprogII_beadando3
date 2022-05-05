@@ -11,8 +11,8 @@
 
 using namespace genv;
 
-const int XX = 1024;
-const int YY = 1200;
+const int XX = 800;
+const int YY = 1000;
 
 class Ablak : public Window
 {
