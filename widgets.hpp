@@ -9,8 +9,7 @@ class Widget
 {
 protected:
     int m_x, m_y, m_size_x, m_size_y;
-    static const int XX = 400;
-    static const int YY = 400;
+    std::pair<int, int> m_screensize;
 
 public:
     Widget(Window* window, int x, int y, int sx, int sy);

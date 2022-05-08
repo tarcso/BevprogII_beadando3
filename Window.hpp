@@ -8,12 +8,18 @@ class Window
 {
 protected:
     std::vector<Widget*> widgets;
+    int screenx, screeny;
 
 public:
     Window();
     void event_loop();
     void registerwidget(Widget* widget) {widgets.push_back(widget);}
     virtual void esemeny(const std::string& ki_mondta) = 0;
+    std::pair<int, int> screensize()
+    {
+        return std::make_pair(screenx, screeny);
+    }
+
 };
 
 

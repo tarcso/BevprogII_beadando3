@@ -15,10 +15,10 @@ GordMenu::GordMenu(Window* window, int x, int y, int sx, int sy, std::string szo
     {
         m_elemek.push_back(new MenuElem(x, y + (i+1) * sy, sx, sy, v[i]));
     }
-
+    
     for (size_t i = 0; i < m_hatardb; i++)
     {
-        if(m_elemek[i]->kintvan(YY))
+        if(m_elemek[i]->kintvan(m_screensize.second))
         {
             m_hatardb = i;
             break;

@@ -6,6 +6,7 @@ using namespace genv;
 Widget::Widget(Window* window, int x, int y, int sx, int sy)
 : m_x(x), m_y(y), m_size_x(sx), m_size_y(sy)
 {
+    m_screensize = window->screensize();
     window->registerwidget(this);
 }
 
