@@ -24,11 +24,6 @@ bool Korong::red() const
 
 void Korong::handle(const event& ev)
 {
-    std::cout << "hello" << std::endl;
-    if(ev.type == ev_mouse)
-    {
-        m_x =  * m_screensize.first/8.0;
-    }
 }
 
 void Korong::draw() const
@@ -53,6 +48,20 @@ void Korong::draw() const
         b = 0;
     }
     kor(m_x, m_y, m_rad, r, g, b);
+}
+
+void Korong::moveright()
+{
+    std::cout << "here " << std::endl;
+    if(m_x + m_screensize.first/8.0 < m_screensize.first)
+        m_x += m_screensize.first/8.0;
+}
+
+void Korong::moveleft()
+{
+    std::cout << "heree" << std::endl;
+    if(m_x - m_screensize.first/8.0 > 0)
+        m_x -= m_screensize.first/8.0;
 }
 
 void kor(int x, int y, int rad, int r, int g, int b)

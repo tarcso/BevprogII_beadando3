@@ -17,7 +17,9 @@ const int YY = 1000;
 class JatekMester : public Window
 {
     Palya* palya;
-    Korong* k;
+    Korong* tmp;
+    PushButton* right;
+    PushButton* left;
 
 public:
     JatekMester()
@@ -25,7 +27,9 @@ public:
         screenx = XX;
         screeny = YY;
         palya = new Palya(this, XX/16.0, XX/8.0*35.0/32.0, XX/8.0*7.0, XX/8.0*6.0);
-        k = new Korong(this, XX/2.0, (XX/8.0*35.0/32.0)/2, XX/16.0 * 55.0/60.0, XX/16.0 * 55.0/60.0, false, true);
+        tmp = new Korong(this, XX/2.0, (XX/8.0*35.0/32.0)/2, XX/16.0 * 55.0/60.0, XX/16.0 * 55.0/60.0, false, true);
+        right = new PushButton(this, XX/4.0, YY * 6/7.0, XX/10.0, XX/20.0, "->", [this](){tmp->moveright();});
+        left = new PushButton(this, XX * 3/4.0, YY * 6/7.0, XX/10.0, XX/20.0, "->", [this](){tmp->moveleft();});
     }
 
     void esemeny(const std::string& ki_mondta)
