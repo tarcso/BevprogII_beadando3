@@ -29,7 +29,7 @@ void Palya::draw() const
     gout << move_to(m_x, m_y) << color(0, 0, 255) << box(m_size_x, m_size_y);
 }
 
-bool Palya::putInsiker(Korong * k)
+bool Palya::putInSiker(Korong * k)
 {
     if(!m_korong[k->oszlopszam()-1][0]->ures()) return false;
 
@@ -48,4 +48,109 @@ bool Palya::putInsiker(Korong * k)
         }
     }
     return false;
+}
+
+bool Palya::vannyer() const
+{
+    int mennyi = 0;
+    bool red = true;
+    for(size_t x = 0; x < m_korong.size(); x++)
+    {
+        for (size_t y = 1; y < m_korong[x].size(); y++)
+        {
+            if(m_korong[x][y]->red() == m_korong[x][y-1]->red())
+                mennyi++;
+            else
+            {
+                mennyi = 0;
+                red = m_korong[x][y]->red();
+            }
+
+            if(mennyi == 4) return true;
+        }
+    }
+
+    for(size_t y = 0; y < 6; y++)
+    {
+        for (size_t x = 1; x < 7; x++)
+        {
+            if(m_korong[x][y]->red() == m_korong[x-1][y]->red())
+                mennyi++;
+            else
+            {
+                mennyi = 0;
+                red = m_korong[x][y]->red();
+            }
+
+            if(mennyi == 4) return true;
+        }
+    }
+
+
+    for (size_t y = 2; y < 6; y++)
+    {
+        for (size_t i = 1; i < y+1; i++)
+        {
+            if(m_korong[i][y-i]->red() == m_korong[i-1][y-i+1]->red())
+                mennyi++;
+            else
+            {
+                mennyi = 0;
+                red = m_korong[i][y-i]->red();
+            }
+
+            if(mennyi == 4) return true;
+        }
+    }
+
+    for (size_t x = 2; x < 4; x++)
+    {
+        for (size_t i = 1; x+i < 7; i++)
+        {
+            if(m_korong[x+i][5-i]->red() == m_korong[x+i-1][5-i+1]->red())
+                mennyi++;
+            else
+            {
+                mennyi = 0;
+                red = m_korong[x+i][5-i]->red();
+            }
+
+            if(mennyi == 4) return true;
+        }
+    }
+
+
+    
+    for (size_t y = 5; y >= 3; y++)
+    {
+        for (size_t i = 1; y-i >= 0; i++)
+        {
+            if(m_korong[6-i][y-i]->red() == m_korong[6-i+1][y-i+1]->red())
+                mennyi++;
+            else
+            {
+                mennyi = 0;
+                red = m_korong[6-i][y-i]->red();
+            }
+
+            if(mennyi == 4) return true;
+        }
+    }
+
+    for (size_t x = 3; x < 6; x++)
+    {
+        for (size_t i = 1; x-i >= 0; i++)
+        {
+            if(m_korong[x-i][5-i]->red() == m_korong[x-i+1][5-i+1]->red())
+                mennyi++;
+            else
+            {
+                mennyi = 0;
+                red = m_korong[x-i][5-i]->red();
+            }
+
+            if(mennyi == 4) return true;
+        }
+    }
+    
 }

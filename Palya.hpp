@@ -13,7 +13,8 @@ class Palya : public Widget
         Palya(Window* window, int x, int y, int sx, int sy);
         void handle(const genv::event& ev);
         void draw() const;
-        bool putInsiker(Korong*);
+        bool putInSiker(Korong*);
+        bool vannyer() const;
 };
 
 #endif //PALYA_HPP_INCLUDED

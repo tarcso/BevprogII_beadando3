@@ -32,12 +32,17 @@ public:
         right = new PushButton(this, XX * 3/4.0-XX/10.0, YY * 6/7.0, XX/10.0, XX/20.0, "->", [this](){tmp->moveright();});
         left = new PushButton(this, XX/4.0, YY * 6/7.0, XX/10.0, XX/20.0, "<-", [this](){tmp->moveleft();});
         enter = new PushButton(this, XX/2.0 - XX/20.0, YY * 6/7.0, XX/10.0, XX/20.0, "enter", [this](){
-            if(palya->putInsiker(tmp))
+            if(palya->putInSiker(tmp))
             {
                 bool color = abs(tmp->red()-1);
                 tmp->changecolor(color);
             }
         });
+    }
+
+    void nyertes()
+    {
+        std::cout << palya->vannyer() << std::endl;
     }
 
     void esemeny(const std::string& ki_mondta)
