@@ -16,9 +16,11 @@ class Korong : public Widget
         void handle(const genv::event& ev);
         void draw() const;
         bool red() const;
+        bool ures() const;
         void moveright();
         void moveleft();
-
+        void changecolor(bool red);
+        int oszlopszam();
 };
 
 void kor(int x, int y, int rad, int r, int g, int b);

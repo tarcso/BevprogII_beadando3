@@ -43,7 +43,7 @@ void Korong::draw() const
     }
     else
     {
-        r = 0;
+        r = 255;
         g = 255;
         b = 0;
     }
@@ -52,16 +52,30 @@ void Korong::draw() const
 
 void Korong::moveright()
 {
-    std::cout << "here " << std::endl;
     if(m_x + m_screensize.first/8.0 < m_screensize.first)
         m_x += m_screensize.first/8.0;
 }
 
 void Korong::moveleft()
 {
-    std::cout << "heree" << std::endl;
     if(m_x - m_screensize.first/8.0 > 0)
         m_x -= m_screensize.first/8.0;
+}
+
+void Korong::changecolor(bool red)
+{
+    m_ures = false;
+    m_red = red;
+}
+
+int Korong::oszlopszam()
+{
+    return m_x / (m_screensize.first / 8.0);
+}
+
+bool Korong::ures() const
+{
+    return m_ures;
 }
 
 void kor(int x, int y, int rad, int r, int g, int b)
