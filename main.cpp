@@ -36,6 +36,7 @@ public:
             {
                 bool color = abs(tmp->red()-1);
                 tmp->changecolor(color);
+                std::cout << palya->vannyer() << std::endl;
             }
         });
     }

@@ -134,18 +134,18 @@ bool Palya::vannyer() const
 
 
     
-    for (size_t y = 5; y >= 3; y++)
+    for (size_t y = 6; y >= 3; y--)
     {
-        for (size_t i = 1; y-i >= 0; i++)
+        for (size_t i = 1; i <= y; i++)
         {
-            if(!m_korong[6-i][y-i]->ures() && !m_korong[6-i+1][y-i+1]->ures())
+            if(!m_korong[7-i][y-i]->ures() && !m_korong[7-i+1][y-i+1]->ures())
             {
-                if(m_korong[6-i][y-i]->red() == m_korong[6-i+1][y-i+1]->red())
+                if(m_korong[7-i][y-i]->red() == m_korong[7-i+1][y-i+1]->red())
                     mennyi++;
                 else
                 {
                     mennyi = 0;
-                    red = m_korong[6-i][y-i]->red();
+                    red = m_korong[7-i][y-i]->red();
                 }
             }
 
@@ -155,7 +155,7 @@ bool Palya::vannyer() const
 
     for (size_t x = 3; x < 6; x++)
     {
-        for (size_t i = 1; x-i >= 0; i++)
+        for (size_t i = 1; i <= x; i++)
         {
                 if(!m_korong[x-i][5-i]->ures() && !m_korong[x-i+1][5-i+1]->ures())
                 {
