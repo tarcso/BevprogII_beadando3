@@ -36,14 +36,8 @@ public:
             {
                 bool color = abs(tmp->red()-1);
                 tmp->changecolor(color);
-                std::cout << palya->vannyer() << std::endl;
             }
         });
-    }
-
-    void nyertes()
-    {
-        std::cout << palya->vannyer() << std::endl;
     }
 
     void esemeny(const std::string& ki_mondta)

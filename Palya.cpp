@@ -57,10 +57,13 @@ bool Palya::vannyer() const
 
     for(size_t x = 0; x < m_korong.size(); x++)
     {
+        mennyi = 0;
         for (size_t y = 1; y < m_korong[x].size(); y++)
         {
             if(m_korong[x][y]->red() == m_korong[x][y-1]->red() && !m_korong[x][y]->ures() && !m_korong[x][y-1]->ures())
+            {
                 mennyi++;
+            }
             else
             {
                 mennyi = 0;
@@ -70,10 +73,10 @@ bool Palya::vannyer() const
             if(mennyi == 4) return true;
         }
     }
-    mennyi = 0;
 
     for(size_t y = 0; y < 6; y++)
     {
+        mennyi = 0;
         for (size_t x = 1; x < 7; x++)
         {
             if(m_korong[x][y]->red() == m_korong[x-1][y]->red() && !m_korong[x][y]->ures() && !m_korong[x-1][y]->ures())
@@ -87,50 +90,18 @@ bool Palya::vannyer() const
             if(mennyi == 4) return true;
         }
     }
-    mennyi = 0;
 
 
-    for (size_t y = 2; y < 6; y++)
+    for (size_t x = -m_korong[0].size(); x < m_korong.size(); x++)
     {
-        for (size_t i = 1; i < y+1; i++)
+        mennyi = 0;
+        for (size_t i = 0; i < m_korong[0].size()-1; i++)
         {
-            if(m_korong[i][y-i]->red() == m_korong[i-1][y-i+1]->red() && !m_korong[i][y-1]->ures() && !m_korong[i-1][y-i+1]->ures())
-                mennyi++;
-            else
+            if(x + i > 0 && x + i < m_korong.size() && x + i + 1 > 0 && x + i + 1 < m_korong.size())
             {
-                mennyi = 0;
-                red = m_korong[i][y-i]->red();
+                if(m_korong[x+i][i]->red() == m_korong[x+i][i]->red() && !m_korong[x+i+1][i+1]->ures() && !m_korong[x+i+1][i+i]->ures())
+                    mennyi++;
             }
-
-            if(mennyi == 4) return true;
-        }
-    }
-    mennyi = 0;
-
-    for (size_t x = 1; x < 4; x++)
-    {
-        for (size_t i = 1; x+i < 7; i++)
-        {
-            if(m_korong[x+i][5-i]->red() == m_korong[x+i-1][5-i+1]->red() && !m_korong[x+i][5-i]->ures() && !m_korong[x+i-1][5-i+1]->ures())
-                mennyi++;
-            else
-            {
-                mennyi = 0;
-                red = m_korong[x+i][5-i]->red();
-            }
-
-            if(mennyi == 4) return true;
-        }
-    }
-
-    mennyi = 0;
-    
-    for (size_t x = 1; x <= 6; x++)
-    {
-        for (size_t i = 1; i < 6; i++)
-        {
-            if(m_korong[x+i][i]->red() == m_korong[x+i+1][i+1]->red() && !m_korong[x+i][i]->ures() && !m_korong[x+i+1][i+1]->ures())
-                mennyi++;
             else
             {
                 mennyi = 0;
@@ -140,23 +111,25 @@ bool Palya::vannyer() const
             if(mennyi == 4) return true;
         }
     }
+    
 
-    mennyi = 0;
-
-    for (size_t x = 3; x < 6; x++)
+    for (size_t x = -m_korong[0].size(); x < m_korong.size(); x++)
     {
-        for (size_t i = 1; i <= x; i++)
+        mennyi = 0;
+        for (size_t i = 0; i < m_korong[0].size()-1; i++)
         {
-            if(m_korong[x-i][5-i]->red() == m_korong[x-i+1][5-i+1]->red() && !m_korong[x-i][5-i]->ures() && !m_korong[x-i+1][5-i+1]->ures())
-                mennyi++;
+            if(x - i > 0 && x - i < m_korong.size() && x - i - 1 > 0 && x - i - 1 < m_korong.size())
+            {
+                if(m_korong[x-i][-i]->red() == m_korong[x-i][-i]->red() && !m_korong[x-i-1][i-1]->ures() && !m_korong[x-i-1][i-i]->ures())
+                    mennyi++;
+            }
             else
             {
                 mennyi = 0;
-                red = m_korong[x-i][5-i]->red();
+                red = m_korong[x-i][-i]->red();
             }
-        }
 
-        if(mennyi == 4) return true;
+            if(mennyi == 4) return true;
+        }
     }
-    return false;
 }
