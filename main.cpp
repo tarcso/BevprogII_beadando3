@@ -21,6 +21,7 @@ class JatekMester : public Window
     PushButton* right;
     PushButton* left;
     PushButton* enter;
+    PushButton* winner;
 
 public:
     JatekMester()
@@ -34,10 +35,26 @@ public:
         enter = new PushButton(this, XX/2.0 - XX/20.0, YY * 6/7.0, XX/10.0, XX/20.0, "enter", [this](){
             if(palya->putInSiker(tmp))
             {
+                win();
                 bool color = abs(tmp->red()-1);
                 tmp->changecolor(color);
             }
         });
+    }
+
+    void win()
+    {
+            if(palya->vannyer().first)
+            {
+                std::string s = "A nyertes: ";
+                if(palya->vannyer().second) 
+                    s += "piros!";
+                else
+                    s += "sárga!";
+
+                gout << refresh;
+                winner = new PushButton(this, 300, 950, 200, 40, s, [](){});
+            }
     }
 
     void esemeny(const std::string& ki_mondta)

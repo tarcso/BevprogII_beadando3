@@ -50,7 +50,7 @@ bool Palya::putInSiker(Korong * k)
     return false;
 }
 
-bool Palya::vannyer() const
+std::pair<bool, bool> Palya::vannyer() const
 {
     int mennyi = 0;
     bool red = true;
@@ -70,7 +70,7 @@ bool Palya::vannyer() const
                 red = m_korong[x][y]->red();
             }
 
-            if(mennyi == 4) return true;
+            if(mennyi == 3) return std::make_pair(true, red);
         }
     }
 
@@ -80,56 +80,65 @@ bool Palya::vannyer() const
         for (size_t x = 1; x < 7; x++)
         {
             if(m_korong[x][y]->red() == m_korong[x-1][y]->red() && !m_korong[x][y]->ures() && !m_korong[x-1][y]->ures())
+            {
                 mennyi++;
+            }
             else
             {
                 mennyi = 0;
                 red = m_korong[x][y]->red();
             }
 
-            if(mennyi == 4) return true;
+            if(mennyi == 3) return std::make_pair(true, red);
         }
     }
 
 
-    for (size_t x = -m_korong[0].size(); x < m_korong.size(); x++)
+    for (int x = -7; x < 8; x++)
     {
         mennyi = 0;
-        for (size_t i = 0; i < m_korong[0].size()-1; i++)
+        for (size_t i = 0; i < 5; i++)
         {
-            if(x + i > 0 && x + i < m_korong.size() && x + i + 1 > 0 && x + i + 1 < m_korong.size())
+            if(x + i >= 0 && x + i < 7 && x + i + 1 >= 0 && x + i + 1 < 7)
             {
-                if(m_korong[x+i][i]->red() == m_korong[x+i][i]->red() && !m_korong[x+i+1][i+1]->ures() && !m_korong[x+i+1][i+i]->ures())
+                if(m_korong[x+i][i]->red() == m_korong[x+i+1][i+1]->red() && !m_korong[x+i][i]->ures() && !m_korong[x+i+1][i+1]->ures())
+                {
                     mennyi++;
+                }
+                else
+                {
+                    mennyi = 0;
+                    red = m_korong[x+i][i]->red();
+                }
             }
-            else
-            {
-                mennyi = 0;
-                red = m_korong[x+i][i]->red();
-            }
-
-            if(mennyi == 4) return true;
+            if(mennyi == 3) return std::make_pair(true, red);
         }
     }
     
 
-    for (size_t x = -m_korong[0].size(); x < m_korong.size(); x++)
+    for (int x = -7; x < 8; x++)
     {
         mennyi = 0;
-        for (size_t i = 0; i < m_korong[0].size()-1; i++)
+        for (size_t i = 0; i < 5; i++)
         {
-            if(x - i > 0 && x - i < m_korong.size() && x - i - 1 > 0 && x - i - 1 < m_korong.size())
+            if(x + i >= 0 && x + i < 7 && x + i + 1 >= 0 && x + i + 1 < 7)
             {
-                if(m_korong[x-i][-i]->red() == m_korong[x-i][-i]->red() && !m_korong[x-i-1][i-1]->ures() && !m_korong[x-i-1][i-i]->ures())
+                if(m_korong[x+i][5-i]->red() == m_korong[x+i + 1][5-i-1]->red() && !m_korong[x+i][5-i]->ures() && !m_korong[x+i+1][5-i-1]->ures())
+                {
                     mennyi++;
-            }
-            else
-            {
-                mennyi = 0;
-                red = m_korong[x-i][-i]->red();
+                }
+                else
+                {
+                    mennyi = 0;
+                    red = m_korong[x+i][5-i]->red();
+                }
+                if(mennyi > 0)
+                std::cout << mennyi << std::endl;
             }
 
-            if(mennyi == 4) return true;
+            if(mennyi == 3) return std::make_pair(true, red);
         }
     }
+
+    return std::make_pair(false, red);
 }

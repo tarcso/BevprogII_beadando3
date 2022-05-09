@@ -14,7 +14,7 @@ class Palya : public Widget
         void handle(const genv::event& ev);
         void draw() const;
         bool putInSiker(Korong*);
-        bool vannyer() const;
+        std::pair<bool, bool> vannyer() const;
 };
 
 #endif //PALYA_HPP_INCLUDED
