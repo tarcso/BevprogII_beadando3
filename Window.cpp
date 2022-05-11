@@ -23,6 +23,7 @@ void Window::event_loop() {
             if(w->is_selected(ev.pos_x, ev.pos_y))
             {
                 focus = w;
+                break;
             }
         }
         if(focus != nullptr) focus->handle(ev);
@@ -34,4 +35,17 @@ void Window::event_loop() {
 
         gout << refresh;
     }
+}
+
+void Window::torolWidget(Widget* w)
+{
+    std::vector<Widget*>::iterator itt;
+    for (std::vector<Widget*>::iterator it = widgets.begin();
+         it != widgets. end();
+         ++it)
+    {
+        if(*it == w) itt = it;
+    }
+    
+    widgets.erase(itt);
 }

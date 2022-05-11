@@ -19,7 +19,7 @@ public:
     {
         return std::make_pair(screenx, screeny);
     }
-
+    void torolWidget(Widget* w);
 };
 
 

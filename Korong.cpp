@@ -3,10 +3,8 @@
 
 using namespace genv;
 
-Korong::Korong(Window* window, int x, int y, int sx, int sy, bool ures, bool rd) : Widget(window, x-sx, y-sy, 2*sx, 2*sy)
+Korong::Korong(Window* window, int x, int y, int sx, int sy, bool ures, bool rd) : Widget(window, x, y, sx, sy)
 {
-    m_x = x;
-    m_y = y;
     m_ures = ures;
 
     if(!ures)
@@ -24,6 +22,11 @@ bool Korong::red() const
 
 void Korong::handle(const event& ev)
 {
+    if(ev.type == ev_mouse)
+    {
+        if(ev.pos_x/(m_screensize.first/8) > 0 && (ev.pos_x-m_screensize.first/16)/(m_screensize.first/8) * m_screensize.first/8 + m_screensize.first/8 < m_screensize.first)
+            m_x = (ev.pos_x-m_screensize.first/16)/(m_screensize.first/8) * m_screensize.first/8 + m_screensize.first/8;
+    }
 }
 
 void Korong::draw() const
@@ -87,4 +90,14 @@ void kor(int x, int y, int rad, int r, int g, int b)
             if(i*i + j*j < rad*rad) gout << color(r,g,b) << move_to(x-j,y+i) << dot;
         }
     }
+}
+
+void Korong::changestatus(bool ures)
+{
+    m_ures = ures;
+}
+
+bool Korong::is_selected(int mx, int my) const
+{
+    return mx >= m_x-m_size_x && mx <= m_x + m_size_x && my >= m_y-m_size_y && my <= m_y + m_size_y;
 }

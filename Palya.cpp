@@ -1,10 +1,10 @@
 #include "Palya.hpp"
-#include <iostream>
 
 using namespace genv;
 
-Palya::Palya(Window * window, int x, int y, int sx, int sy) : Widget(window, x, y, sx, sy)
+Palya::Palya(Window * window, int x, int y, int sx, int sy, std::function<void()> handle) : Widget(window, x, y, sx, sy)
 {
+    m_handle = handle;
     for (int x = 1; x < m_x * 16; x++)
     {
         if(x % (m_x * 2) == 0)
@@ -22,6 +22,10 @@ Palya::Palya(Window * window, int x, int y, int sx, int sy) : Widget(window, x, 
 
 void Palya::handle(const event& ev)
 {
+    if(ev.type == ev_mouse && ev.button == btn_left && is_selected(ev.pos_x, ev.pos_y))
+    {
+        m_handle();
+    }
 }
 
 void Palya::draw() const
@@ -63,14 +67,16 @@ std::pair<bool, bool> Palya::vannyer() const
             if(m_korong[x][y]->red() == m_korong[x][y-1]->red() && !m_korong[x][y]->ures() && !m_korong[x][y-1]->ures())
             {
                 mennyi++;
+                if(mennyi == 3)
+                {
+                    red = m_korong[x][y]->red();
+                    return std::make_pair(true, red);
+                }
             }
             else
             {
                 mennyi = 0;
-                red = m_korong[x][y]->red();
             }
-
-            if(mennyi == 3) return std::make_pair(true, red);
         }
     }
 
@@ -82,14 +88,16 @@ std::pair<bool, bool> Palya::vannyer() const
             if(m_korong[x][y]->red() == m_korong[x-1][y]->red() && !m_korong[x][y]->ures() && !m_korong[x-1][y]->ures())
             {
                 mennyi++;
+                if(mennyi == 3)
+                {
+                    red = m_korong[x][y]->red();
+                    return std::make_pair(true, red);
+                }
             }
             else
             {
                 mennyi = 0;
-                red = m_korong[x][y]->red();
             }
-
-            if(mennyi == 3) return std::make_pair(true, red);
         }
     }
 
@@ -104,14 +112,17 @@ std::pair<bool, bool> Palya::vannyer() const
                 if(m_korong[x+i][i]->red() == m_korong[x+i+1][i+1]->red() && !m_korong[x+i][i]->ures() && !m_korong[x+i+1][i+1]->ures())
                 {
                     mennyi++;
+                    if(mennyi == 3)
+                    {
+                        red = m_korong[x+i][i]->red();
+                        return std::make_pair(true, red);
+                    }
                 }
                 else
                 {
                     mennyi = 0;
-                    red = m_korong[x+i][i]->red();
                 }
             }
-            if(mennyi == 3) return std::make_pair(true, red);
         }
     }
     
@@ -126,19 +137,36 @@ std::pair<bool, bool> Palya::vannyer() const
                 if(m_korong[x+i][5-i]->red() == m_korong[x+i + 1][5-i-1]->red() && !m_korong[x+i][5-i]->ures() && !m_korong[x+i+1][5-i-1]->ures())
                 {
                     mennyi++;
+                    if(mennyi == 3)
+                    {
+                        red = m_korong[x+i][5-i]->red();
+                        return std::make_pair(true, red);
+                    }
                 }
                 else
                 {
                     mennyi = 0;
                     red = m_korong[x+i][5-i]->red();
                 }
-                if(mennyi > 0)
-                std::cout << mennyi << std::endl;
             }
-
-            if(mennyi == 3) return std::make_pair(true, red);
         }
     }
 
     return std::make_pair(false, red);
+}
+
+void Palya::changefunc(std::function<void()> func)
+{
+    m_handle = func;
+}
+
+void Palya::empty()
+{
+    for(std::vector<Korong*> sorvec : m_korong)
+    {
+        for(Korong* k : sorvec)
+        {
+            k->changestatus(true);
+        }
+    }
 }

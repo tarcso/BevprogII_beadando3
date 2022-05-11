@@ -29,3 +29,8 @@ void PushButton::draw() const
 
     gout << move_to(m_x + m_size_x/2.0-gout.twidth(m_szov)/2.0, m_y + m_size_y/2 - (gout.cascent()+ gout.cdescent())/2) << color(255,255,255) << text(m_szov);
 }
+
+void PushButton::changefunc(std::function<void()> func)
+{
+    m_func = func;
+}

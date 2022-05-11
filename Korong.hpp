@@ -20,7 +20,9 @@ class Korong : public Widget
         void moveright();
         void moveleft();
         void changecolor(bool red);
+        void changestatus(bool ures);
         int oszlopszam();
+        bool is_selected(int mx, int my) const override;
 };
 
 void kor(int x, int y, int rad, int r, int g, int b);
