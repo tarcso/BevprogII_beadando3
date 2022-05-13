@@ -62,8 +62,9 @@ public:
                 enter->changefunc(berak);
                 palya->changefunc(berak);
                 palya->empty();
+                red = tmp->red();
                 delete tmp;
-                tmp = new Korong(this, XX/2.0, (XX/8.0*35.0/32.0)/2, XX/16.0 * 45.0/60.0, XX/16.0 * 45.0/60.0, false, abs(red-1));
+                tmp = new Korong(this, XX/2.0, (XX/8.0*35.0/32.0)/2, XX/16.0 * 45.0/60.0, XX/16.0 * 45.0/60.0, false, red);
                 retry = true;
                 torolWidget(winner);
             });
