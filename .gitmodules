@@ -1,3 +1,6 @@
 [submodule "graphicslib"]
 	path = graphicslib
 	url = https://github.com/flugi/ITK_graphicslib.git
+[submodule "libtarcso"]
+	path = libtarcso
+	url = ssh://github.com/tarcso/libtarcso.git

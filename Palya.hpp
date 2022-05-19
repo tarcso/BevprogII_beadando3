@@ -19,6 +19,7 @@ class Palya : public Widget
         std::pair<bool, bool> vannyer() const;
         void changefunc(std::function<void()> func);
         void empty();
+        void unfocus(){}
 };
 
 #endif //PALYA_HPP_INCLUDED
